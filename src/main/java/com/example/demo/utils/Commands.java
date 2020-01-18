@@ -1,8 +1,8 @@
+/* Licensed under Apache-2.0 */
 package com.example.demo.utils;
 
-import lombok.experimental.UtilityClass;
-
 import java.util.ArrayList;
+import lombok.experimental.UtilityClass;
 
 /** @author Chris Turner (chris@forloop.space) */
 @UtilityClass

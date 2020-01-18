@@ -1,11 +1,6 @@
 /* Licensed under Apache-2.0 */
 package com.example.demo.service;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.stereotype.Service;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,6 +8,10 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Service;
 
 /** @author Chris Turner (chris@forloop.space) */
 @Slf4j
