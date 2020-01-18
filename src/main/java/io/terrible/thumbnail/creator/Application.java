@@ -16,7 +16,7 @@ public class Application {
 
   /** Input arguments are passed into {@link TaskConfiguration} for validation and processing. */
   @Getter
-  public static class InputArgs {
+  public static class Input {
 
     @Parameter(
         names = {"--video", "-v"},
