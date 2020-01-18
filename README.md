@@ -7,8 +7,8 @@ Small Spring Task which wraps over FFMPEG to generate a set number of thumbnails
 ## Usage
 
 ### Arguments
-* `--video` The absolute path to to the video file.
-* `--count` The number of thumbnails to create, the more, the longer the task will execute. Default is 12.
+  * `--video` The absolute path to to the video file.
+  * `--count` The number of thumbnails to create, the more, the longer the task will execute. Default is 12.
 
 #### Example
 ```shell script

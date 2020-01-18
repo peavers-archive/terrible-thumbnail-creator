@@ -1,17 +1,16 @@
 /* Licensed under Apache-2.0 */
 package io.terrible.thumbnail.creator.service;
 
-import io.terrible.thumbnail.creator.utils.Commands;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.io.FileUtils;
-import org.springframework.stereotype.Service;
-
+import io.terrible.thumbnail.creator.utils.CommandUtil;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.FileUtils;
+import org.springframework.stereotype.Service;
 
 /** @author Chris Turner (chris@forloop.space) */
 @Slf4j
@@ -41,7 +40,7 @@ public class ThumbnailServiceImpl implements ThumbnailService {
 
       try {
         processService.execute(
-            Commands.createThumbnail(
+            CommandUtil.createThumbnail(
                 String.valueOf(timestamp), videoPath.toFile().getAbsolutePath(), output));
 
         thumbnails.add(Paths.get(output));
@@ -61,7 +60,8 @@ public class ThumbnailServiceImpl implements ThumbnailService {
 
     try {
       final String output =
-          processService.execute(Commands.calculateDuration(videoPath.toFile().getAbsolutePath()));
+          processService.execute(
+              CommandUtil.calculateDuration(videoPath.toFile().getAbsolutePath()));
 
       return Double.parseDouble(output);
 

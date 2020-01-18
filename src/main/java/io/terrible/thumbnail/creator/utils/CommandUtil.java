@@ -6,7 +6,7 @@ import lombok.experimental.UtilityClass;
 
 /** @author Chris Turner (chris@forloop.space) */
 @UtilityClass
-public class Commands {
+public class CommandUtil {
 
   public static ArrayList<String> createThumbnail(
       final String timestamp, final String videoPath, final String output) {
