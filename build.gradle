@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'io.terrible.thumbnail.creator'
-version = '0.0.1-SNAPSHOT'
+archivesBaseName = 'terrible-thumbnail-creator'
 sourceCompatibility = '11'
 
 configurations {
@@ -35,6 +35,8 @@ dependencies {
     implementation 'org.apache.commons:commons-lang3:3.9'
     implementation 'commons-io:commons-io:2.6'
 
+    // Other
+    implementation 'com.beust:jcommander:1.78'
 
     // Development
     compileOnly 'org.projectlombok:lombok'
@@ -65,3 +67,5 @@ spotless {
         googleJavaFormat()
     }
 }
+
+build.dependsOn spotlessJavaApply

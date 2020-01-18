@@ -2,15 +2,16 @@
 package io.terrible.thumbnail.creator.service;
 
 import io.terrible.thumbnail.creator.utils.Commands;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.FileUtils;
+import org.springframework.stereotype.Service;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.io.FileUtils;
-import org.springframework.stereotype.Service;
 
 /** @author Chris Turner (chris@forloop.space) */
 @Slf4j
@@ -18,7 +19,6 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ThumbnailServiceImpl implements ThumbnailService {
 
-  private static final int NUMBER_OF_THUMBNAILS = 12;
   private final ProcessService processService;
 
   /**
@@ -26,18 +26,18 @@ public class ThumbnailServiceImpl implements ThumbnailService {
    * FFMPEG jump to those time stamps to grab the closest frame we find.
    */
   @Override
-  public ArrayList<Path> createThumbnails(final Path videoPath) {
+  public ArrayList<Path> createThumbnails(final Path videoPath, final int thumbnailCount) {
 
     final double duration = calculateDuration(videoPath) / 60;
 
     final Path directory = createThumbnailDirectory(videoPath);
 
-    final ArrayList<Path> thumbnails = new ArrayList<>(NUMBER_OF_THUMBNAILS);
+    final ArrayList<Path> thumbnails = new ArrayList<>(thumbnailCount);
 
-    for (int i = 1; i <= NUMBER_OF_THUMBNAILS; i++) {
+    for (int i = 1; i <= thumbnailCount; i++) {
       final String output = String.format("%s/00%d.jpg", directory, i);
 
-      final double timestamp = (i - 0.5) * (duration / NUMBER_OF_THUMBNAILS) * 60;
+      final double timestamp = (i - 0.5) * (duration / thumbnailCount) * 60;
 
       try {
         processService.execute(
