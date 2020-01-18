@@ -1,11 +1,11 @@
 /* Licensed under Apache-2.0 */
-package com.example.demo.service;
+package io.terrible.thumbnail.creator.service;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
 
 /** @author Chris Turner (chris@forloop.space) */
-public interface FFmpegService {
+public interface ThumbnailService {
 
   ArrayList<Path> createThumbnails(Path videoPath);
 }

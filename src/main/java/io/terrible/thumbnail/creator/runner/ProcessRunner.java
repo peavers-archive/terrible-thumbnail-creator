@@ -1,7 +1,7 @@
 /* Licensed under Apache-2.0 */
-package com.example.demo.runner;
+package io.terrible.thumbnail.creator.runner;
 
-import com.example.demo.service.FFmpegService;
+import io.terrible.thumbnail.creator.service.ThumbnailService;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +13,7 @@ import org.springframework.boot.CommandLineRunner;
 @RequiredArgsConstructor
 public class ProcessRunner implements CommandLineRunner {
 
-  private final FFmpegService ffmpegService;
+  private final ThumbnailService ffmpegService;
 
   private final Path videoPath;
 

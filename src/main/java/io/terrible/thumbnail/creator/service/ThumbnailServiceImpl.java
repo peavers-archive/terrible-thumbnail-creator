@@ -1,23 +1,24 @@
 /* Licensed under Apache-2.0 */
-package com.example.demo.service;
+package io.terrible.thumbnail.creator.service;
 
-import com.example.demo.utils.Commands;
+import io.terrible.thumbnail.creator.utils.Commands;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Service;
 
 /** @author Chris Turner (chris@forloop.space) */
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class FFmpegServiceImpl implements FFmpegService {
+public class ThumbnailServiceImpl implements ThumbnailService {
 
   private static final int NUMBER_OF_THUMBNAILS = 12;
-
   private final ProcessService processService;
 
   /**
@@ -26,13 +27,15 @@ public class FFmpegServiceImpl implements FFmpegService {
    */
   @Override
   public ArrayList<Path> createThumbnails(final Path videoPath) {
+
     final double duration = calculateDuration(videoPath) / 60;
+
+    final Path directory = createThumbnailDirectory(videoPath);
 
     final ArrayList<Path> thumbnails = new ArrayList<>(NUMBER_OF_THUMBNAILS);
 
     for (int i = 1; i <= NUMBER_OF_THUMBNAILS; i++) {
-
-      final String output = String.format("%s/00%d.jpg", videoPath.getParent(), i);
+      final String output = String.format("%s/00%d.jpg", directory, i);
 
       final double timestamp = (i - 0.5) * (duration / NUMBER_OF_THUMBNAILS) * 60;
 
@@ -67,5 +70,25 @@ public class FFmpegServiceImpl implements FFmpegService {
 
       return -1;
     }
+  }
+
+  /**
+   * Creates a folder at the same directory of the video. Warning: This will also remove old copies
+   * of the thumbnails if any are found
+   */
+  private Path createThumbnailDirectory(final Path videoPath) {
+
+    final Path path = Paths.get(videoPath.getParent().toFile().getAbsolutePath() + "/.thumbnails");
+
+    // Not worried if this fails, just try and clean out any old thumbnails before creating new ones
+    FileUtils.deleteQuietly(path.toFile());
+
+    try {
+      return Files.createDirectories(path);
+    } catch (final IOException e) {
+      log.error("failed to create directory {} {} {}", videoPath, e.getMessage(), e);
+    }
+
+    return null;
   }
 }

@@ -5,7 +5,7 @@ plugins {
     id 'java'
 }
 
-group = 'io.terrible.thumbnail'
+group = 'io.terrible.thumbnail.creator'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
@@ -28,12 +28,20 @@ ext {
 }
 
 dependencies {
+    // Spring
     implementation 'org.springframework.cloud:spring-cloud-starter-task'
-    implementation 'org.apache.commons:commons-lang3:3.9'
 
+    // Apache
+    implementation 'org.apache.commons:commons-lang3:3.9'
+    implementation 'commons-io:commons-io:2.6'
+
+
+    // Development
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     annotationProcessor 'org.projectlombok:lombok'
+
+    // Tests
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }

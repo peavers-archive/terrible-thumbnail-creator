@@ -1,5 +1,5 @@
 /* Licensed under Apache-2.0 */
-package com.example.demo.service;
+package io.terrible.thumbnail.creator.service;
 
 import java.io.BufferedReader;
 import java.io.IOException;
