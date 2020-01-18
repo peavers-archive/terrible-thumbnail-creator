@@ -1,3 +1,10 @@
 spring:
   application:
     name: terrible-thumbnail-creator
+
+logging:
+  level:
+    org:
+      springframework:
+        cloud:
+          task: debug
