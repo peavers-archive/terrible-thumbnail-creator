@@ -2,12 +2,14 @@ plugins {
     id 'org.springframework.boot' version '2.2.3.RELEASE'
     id 'io.spring.dependency-management' version '1.0.8.RELEASE'
     id 'com.diffplug.gradle.spotless' version '3.27.1'
+    id 'maven-publish'
     id 'java'
 }
 
-group = 'io.terrible.thumbnail.creator'
-archivesBaseName = 'terrible-thumbnail-creator'
+group = 'io.terrible'
+version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
+
 
 configurations {
     developmentOnly
@@ -20,6 +22,7 @@ configurations {
 }
 
 repositories {
+    mavenLocal()
     mavenCentral()
 }
 
@@ -69,3 +72,14 @@ spotless {
 }
 
 build.dependsOn spotlessJavaApply
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+    repositories {
+        mavenLocal()
+    }
+}

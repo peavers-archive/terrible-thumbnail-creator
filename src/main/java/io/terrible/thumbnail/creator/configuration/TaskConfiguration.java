@@ -19,16 +19,16 @@ import org.springframework.context.annotation.Configuration;
 @RequiredArgsConstructor
 public class TaskConfiguration {
 
-  private final Application.Input input = new Application.Input();
+  private final Application.Args args = new Application.Args();
 
   private final ThumbnailService thumbnailService;
 
   @Bean
   public CommandLineRunner commandLineRunner() {
     return args -> {
-      JCommander.newBuilder().addObject(input).build().parse(args);
+      JCommander.newBuilder().addObject(this.args).build().parse(args);
 
-      thumbnailService.createThumbnails(Paths.get(input.getVideo()), input.getCount());
+      thumbnailService.createThumbnails(Paths.get(this.args.getVideo()), this.args.getCount());
     };
   }
 }
