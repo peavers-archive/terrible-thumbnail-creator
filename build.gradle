@@ -10,7 +10,6 @@ group = 'io.terrible'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
-
 configurations {
     developmentOnly
     runtimeClasspath {
@@ -22,7 +21,6 @@ configurations {
 }
 
 repositories {
-    mavenLocal()
     mavenCentral()
 }
 
@@ -83,3 +81,10 @@ publishing {
         mavenLocal()
     }
 }
+
+task installGitHook(type: Copy) {
+    from new File(rootProject.rootDir, 'pre-commit')
+    into { new File(rootProject.rootDir, '.git/hooks') }
+    fileMode 0777
+}
+tasks.getByPath(':app:preBuild').dependsOn installGitHook

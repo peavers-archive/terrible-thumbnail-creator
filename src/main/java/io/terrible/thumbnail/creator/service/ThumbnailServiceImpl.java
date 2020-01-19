@@ -2,15 +2,16 @@
 package io.terrible.thumbnail.creator.service;
 
 import io.terrible.thumbnail.creator.utils.CommandUtil;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.FileUtils;
+import org.springframework.stereotype.Service;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.io.FileUtils;
-import org.springframework.stereotype.Service;
 
 /** @author Chris Turner (chris@forloop.space) */
 @Slf4j
@@ -22,7 +23,7 @@ public class ThumbnailServiceImpl implements ThumbnailService {
 
   /**
    * Given a video file, divide its time length into the number of thumbnails to create, using
-   * FFMPEG jump to those time stamps to grab the closest frame we find.
+   * FFmpeg jump to those time stamps to grab the closest frame we find.
    */
   @Override
   public ArrayList<Path> createThumbnails(final Path videoPath, final int thumbnailCount) {
