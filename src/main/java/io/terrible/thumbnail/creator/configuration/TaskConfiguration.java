@@ -29,14 +29,6 @@ public class TaskConfiguration {
       JCommander.newBuilder().addObject(this.args).build().parse(args);
 
       thumbnailService.createThumbnails(Paths.get(this.args.getVideo()), this.args.getCount());
-
-
-
-
-
     };
-
-
-
   }
 }

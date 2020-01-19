@@ -2,16 +2,15 @@
 package io.terrible.thumbnail.creator.service;
 
 import io.terrible.thumbnail.creator.utils.CommandUtil;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.io.FileUtils;
-import org.springframework.stereotype.Service;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.FileUtils;
+import org.springframework.stereotype.Service;
 
 /** @author Chris Turner (chris@forloop.space) */
 @Slf4j
