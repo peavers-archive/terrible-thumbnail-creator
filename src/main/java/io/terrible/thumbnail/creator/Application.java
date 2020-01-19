@@ -2,7 +2,6 @@
 package io.terrible.thumbnail.creator;
 
 import com.beust.jcommander.Parameter;
-import io.terrible.thumbnail.creator.configuration.TaskConfiguration;
 import lombok.Data;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,7 +13,6 @@ public class Application {
     SpringApplication.run(Application.class, args);
   }
 
-  /** Input arguments are passed into {@link TaskConfiguration} for validation and processing. */
   @Data
   public static class Args {
 
