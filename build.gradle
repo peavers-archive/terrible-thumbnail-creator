@@ -31,6 +31,7 @@ ext {
 dependencies {
     // Spring
     implementation 'org.springframework.cloud:spring-cloud-starter-task'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
     // Apache
     implementation 'org.apache.commons:commons-lang3:3.9'
@@ -38,6 +39,7 @@ dependencies {
 
     // Other
     implementation 'com.beust:jcommander:1.78'
+    implementation 'org.postgresql:postgresql:42.2.9'
 
     // Development
     compileOnly 'org.projectlombok:lombok'
