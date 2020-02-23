@@ -3,14 +3,18 @@ package io.terrible.thumbnail.creator.configuration;
 
 import com.beust.jcommander.JCommander;
 import io.terrible.thumbnail.creator.Application;
+import io.terrible.thumbnail.creator.service.MessageService;
 import io.terrible.thumbnail.creator.service.ThumbnailService;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import javax.sql.DataSource;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.messaging.support.GenericMessage;
 
 /** @author Chris Turner (chris@forloop.space) */
 @Slf4j
@@ -22,19 +26,28 @@ public class TaskConfig {
 
   private final ThumbnailService thumbnailService;
 
+  private final MessageService messageService;
+
   private final DataSource dataSource;
 
   @Bean
   public DataSourceConfig getTaskConfigurer() {
+
     return new DataSourceConfig(dataSource);
   }
 
   @Bean
   public CommandLineRunner commandLineRunner() {
+
     return args -> {
       JCommander.newBuilder().addObject(this.args).build().parse(args);
 
-      thumbnailService.createThumbnails(Paths.get(this.args.getVideo()), this.args.getCount());
+      final ArrayList<Path> thumbnails =
+          thumbnailService.createThumbnails(Paths.get(this.args.getVideo()), this.args.getCount());
+
+      log.info("Thumbnails {}", thumbnails);
+
+      messageService.send(new GenericMessage<>(thumbnails));
     };
   }
 }

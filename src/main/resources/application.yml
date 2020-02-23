@@ -8,9 +8,8 @@ spring:
     password: password
     driver-class-name: org.postgresql.Driver
 
-logging:
-  level:
-    org:
-      springframework:
-        cloud:
-          task: debug
+  cloud:
+    stream:
+      bindings:
+        thumbnailChannel:
+          destination: terrible-thumbnail-creator
