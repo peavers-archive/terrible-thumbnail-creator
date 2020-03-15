@@ -6,8 +6,8 @@ import org.springframework.messaging.MessageChannel;
 
 public interface MessageBinding {
 
-    String THUMBNAIL_CHANNEL = "thumbnailChannel";
+  String THUMBNAIL_CHANNEL = "thumbnailChannel";
 
-    @Output(THUMBNAIL_CHANNEL)
-    MessageChannel subscription();
+  @Output(THUMBNAIL_CHANNEL)
+  MessageChannel subscription();
 }
