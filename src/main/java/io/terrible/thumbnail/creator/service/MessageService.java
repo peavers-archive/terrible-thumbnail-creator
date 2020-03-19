@@ -1,12 +1,11 @@
 /* Licensed under Apache-2.0 */
 package io.terrible.thumbnail.creator.service;
 
-import java.nio.file.Path;
-import java.util.ArrayList;
+import io.terrible.thumbnail.creator.domain.Result;
 import org.springframework.messaging.support.GenericMessage;
 
 /** @author Chris Turner (chris@forloop.space) */
 public interface MessageService {
 
-  boolean send(GenericMessage<ArrayList<Path>> message);
+  boolean send(GenericMessage<Result> message);
 }

@@ -3,9 +3,9 @@ package io.terrible.thumbnail.creator.configuration;
 
 import com.beust.jcommander.JCommander;
 import io.terrible.thumbnail.creator.Application;
+import io.terrible.thumbnail.creator.domain.Result;
 import io.terrible.thumbnail.creator.service.MessageService;
 import io.terrible.thumbnail.creator.service.ThumbnailService;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import javax.sql.DataSource;
@@ -42,12 +42,15 @@ public class TaskConfig {
     return args -> {
       JCommander.newBuilder().addObject(this.args).build().parse(args);
 
-      final ArrayList<Path> thumbnails =
-          thumbnailService.createThumbnails(Paths.get(this.args.getVideo()), this.args.getCount());
+      final String path = this.args.getVideo();
+      final int count = this.args.getCount();
 
-      log.info("Thumbnails {}", thumbnails);
+      final ArrayList<String> thumbnails =
+          thumbnailService.createThumbnails(Paths.get(path), count);
 
-      messageService.send(new GenericMessage<>(thumbnails));
+      final Result result = Result.builder().videoPath(path).thumbnails(thumbnails).build();
+
+      messageService.send(new GenericMessage<>(result));
     };
   }
 }

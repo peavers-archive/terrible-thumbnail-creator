@@ -25,13 +25,13 @@ public class ThumbnailServiceImpl implements ThumbnailService {
    * FFmpeg jump to those time stamps to grab the closest frame we find.
    */
   @Override
-  public ArrayList<Path> createThumbnails(final Path videoPath, final int thumbnailCount) {
+  public ArrayList<String> createThumbnails(final Path videoPath, final int thumbnailCount) {
 
     final double duration = calculateDuration(videoPath) / 60;
 
     final Path directory = createThumbnailDirectory(videoPath);
 
-    final ArrayList<Path> thumbnails = new ArrayList<>(thumbnailCount);
+    final ArrayList<String> thumbnails = new ArrayList<>(thumbnailCount);
 
     for (int i = 1; i <= thumbnailCount; i++) {
       final String output = String.format("%s/00%d.jpg", directory, i);
@@ -43,7 +43,7 @@ public class ThumbnailServiceImpl implements ThumbnailService {
             CommandUtil.createThumbnail(
                 String.valueOf(timestamp), videoPath.toFile().getAbsolutePath(), output));
 
-        thumbnails.add(Paths.get(output));
+        thumbnails.add(Paths.get(output).toString());
       } catch (final IOException | InterruptedException e) {
         log.error("failed to create thumbnail {} {} {}", videoPath, e.getMessage(), e);
       }

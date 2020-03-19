@@ -2,8 +2,7 @@
 package io.terrible.thumbnail.creator.service;
 
 import io.terrible.thumbnail.creator.binding.MessageBinding;
-import java.nio.file.Path;
-import java.util.ArrayList;
+import io.terrible.thumbnail.creator.domain.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.messaging.MessageChannel;
@@ -24,7 +23,7 @@ public class MessageServiceImpl implements MessageService {
   }
 
   @Override
-  public boolean send(final GenericMessage<ArrayList<Path>> message) {
+  public boolean send(final GenericMessage<Result> message) {
 
     log.info("Sending message {}", message);
 

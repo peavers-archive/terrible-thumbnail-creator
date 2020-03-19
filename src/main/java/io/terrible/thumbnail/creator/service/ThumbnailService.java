@@ -7,5 +7,5 @@ import java.util.ArrayList;
 /** @author Chris Turner (chris@forloop.space) */
 public interface ThumbnailService {
 
-  ArrayList<Path> createThumbnails(Path videoPath, int thumbnailCount);
+  ArrayList<String> createThumbnails(Path videoPath, int thumbnailCount);
 }
