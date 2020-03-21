@@ -31,9 +31,8 @@ ext {
 dependencies {
     // Spring
     implementation 'org.springframework.cloud:spring-cloud-starter-task'
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.springframework.cloud:spring-cloud-starter-task'
     implementation 'org.springframework.cloud:spring-cloud-starter-stream-rabbit'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
     // Apache
     implementation 'org.apache.commons:commons-lang3:3.9'
@@ -85,10 +84,3 @@ publishing {
         mavenLocal()
     }
 }
-
-task installGitHook(type: Copy) {
-    from new File(rootProject.rootDir, 'pre-commit')
-    into { new File(rootProject.rootDir, '.git/hooks') }
-    fileMode 0777
-}
-tasks.getByPath(':build').dependsOn installGitHook

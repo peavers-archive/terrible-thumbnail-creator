@@ -51,6 +51,8 @@ public class TaskConfig {
       final Result result = Result.builder().videoPath(path).thumbnails(thumbnails).build();
 
       messageService.send(new GenericMessage<>(result));
+
+      System.exit(0);
     };
   }
 }
