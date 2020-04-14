@@ -12,7 +12,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Service;
 
-/** @author Chris Turner (chris@forloop.space) */
 @Slf4j
 @Service
 @RequiredArgsConstructor

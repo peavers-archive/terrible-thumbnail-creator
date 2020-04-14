@@ -13,7 +13,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.stereotype.Component;
 
-/** @author Chris Turner (chris@forloop.space) */
 @Component
 @RequiredArgsConstructor
 public class TaskRunner implements CommandLineRunner {

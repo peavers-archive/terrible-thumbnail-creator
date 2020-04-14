@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import lombok.Builder;
 import lombok.Data;
 
-/** @author Chris Turner (chris@forloop.space) */
 @Data
 @Builder
 public class Result {

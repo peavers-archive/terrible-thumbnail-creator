@@ -10,7 +10,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-/** @author Chris Turner (chris@forloop.space) */
 @Slf4j
 @Configuration
 @RequiredArgsConstructor

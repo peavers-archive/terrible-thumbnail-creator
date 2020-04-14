@@ -4,7 +4,6 @@ package io.terrible.thumbnail.creator.utils;
 import java.util.ArrayList;
 import lombok.experimental.UtilityClass;
 
-/** @author Chris Turner (chris@forloop.space) */
 @UtilityClass
 public class CommandUtil {
 
