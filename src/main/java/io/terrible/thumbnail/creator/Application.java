@@ -12,6 +12,7 @@ import org.springframework.cloud.task.configuration.EnableTask;
 public class Application {
 
   public static void main(final String[] args) {
+
     SpringApplication.run(Application.class, args);
   }
 
@@ -19,11 +20,18 @@ public class Application {
   public static class Args {
 
     @Parameter(
-        names = {"--video", "-v"},
+        names = {"--input", "-i"},
         arity = 1,
         description = "Absolute path to video",
         required = true)
-    private String video;
+    private String input;
+
+    @Parameter(
+        names = {"--output", "-o"},
+        arity = 1,
+        description = "Absolute path to thumbnail output",
+        required = true)
+    private String output;
 
     @Parameter(
         names = {"--count", "-c"},

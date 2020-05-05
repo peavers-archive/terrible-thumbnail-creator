@@ -3,12 +3,13 @@ package io.terrible.thumbnail.creator.configuration;
 
 import io.terrible.thumbnail.creator.service.MessageService;
 import io.terrible.thumbnail.creator.service.ThumbnailService;
-import javax.sql.DataSource;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import javax.sql.DataSource;
 
 @Slf4j
 @Configuration
@@ -29,6 +30,7 @@ public class TaskConfig {
 
   @Bean
   public CommandLineRunner commandLineRunner() {
+
     return new TaskRunner(thumbnailService, messageService);
   }
 }

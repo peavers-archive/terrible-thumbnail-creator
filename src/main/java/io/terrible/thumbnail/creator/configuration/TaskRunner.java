@@ -6,12 +6,15 @@ import io.terrible.thumbnail.creator.Application;
 import io.terrible.thumbnail.creator.domain.Result;
 import io.terrible.thumbnail.creator.service.MessageService;
 import io.terrible.thumbnail.creator.service.ThumbnailService;
-import java.nio.file.Paths;
-import java.util.ArrayList;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.cloud.task.listener.annotation.AfterTask;
+import org.springframework.cloud.task.repository.TaskExecution;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.stereotype.Component;
+
+import java.nio.file.Path;
+import java.util.ArrayList;
 
 @Component
 @RequiredArgsConstructor
@@ -28,13 +31,20 @@ public class TaskRunner implements CommandLineRunner {
 
     JCommander.newBuilder().addObject(this.args).build().parse(strings);
 
-    final String path = this.args.getVideo();
+    final String input = this.args.getInput();
+    final String output = this.args.getOutput();
     final int count = this.args.getCount();
 
-    final ArrayList<String> thumbnails = thumbnailService.createThumbnails(Paths.get(path), count);
+    final ArrayList<String> thumbnails =
+        thumbnailService.createThumbnails(Path.of(input), Path.of(output), count);
 
-    final Result result = Result.builder().videoPath(path).thumbnails(thumbnails).build();
+    final Result result = Result.builder().videoPath(input).thumbnails(thumbnails).build();
 
     messageService.send(new GenericMessage<>(result));
+  }
+
+  @AfterTask
+  public void afterMe(TaskExecution taskExecution) {
+    taskExecution.setExitMessage("Completed");
   }
 }
