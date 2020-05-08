@@ -2,13 +2,12 @@
 package io.terrible.thumbnail.creator.service;
 
 import io.terrible.thumbnail.creator.utils.CommandUtil;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
-
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
@@ -22,17 +21,16 @@ public class ThumbnailServiceImpl implements ThumbnailService {
    * FFMPEG jump to those time stamps to grab the closest frame we find.
    */
   @Override
-  public ArrayList<String> createThumbnails(
-      final Path input, final Path output, final int thumbnailCount) {
+  public ArrayList<String> createThumbnails(final Path input, final Path output, final int count) {
 
     final double duration = calculateDuration(input) / 60;
 
-    final ArrayList<String> thumbnails = new ArrayList<>(thumbnailCount);
+    final ArrayList<String> thumbnails = new ArrayList<>(count);
 
-    for (int i = 1; i <= thumbnailCount; i++) {
+    for (int i = 1; i <= count; i++) {
       final Path thumbnailLocation = Path.of(String.format("%s/00%d.jpg", output, i));
 
-      final double timestamp = (i - 0.5) * (duration / thumbnailCount) * 60;
+      final double timestamp = (i - 0.5) * (duration / count) * 60;
 
       try {
         processService.execute(

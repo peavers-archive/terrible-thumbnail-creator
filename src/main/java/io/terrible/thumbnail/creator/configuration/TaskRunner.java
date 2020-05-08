@@ -7,6 +7,7 @@ import io.terrible.thumbnail.creator.domain.Result;
 import io.terrible.thumbnail.creator.service.MessageService;
 import io.terrible.thumbnail.creator.service.ThumbnailService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.cloud.task.listener.annotation.AfterTask;
 import org.springframework.cloud.task.repository.TaskExecution;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Component;
 import java.nio.file.Path;
 import java.util.ArrayList;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class TaskRunner implements CommandLineRunner {
@@ -40,11 +42,14 @@ public class TaskRunner implements CommandLineRunner {
 
     final Result result = Result.builder().videoPath(input).thumbnails(thumbnails).build();
 
+    log.info("Result {}", result);
+
     messageService.send(new GenericMessage<>(result));
   }
 
   @AfterTask
   public void afterMe(TaskExecution taskExecution) {
+
     taskExecution.setExitMessage("Completed");
   }
 }

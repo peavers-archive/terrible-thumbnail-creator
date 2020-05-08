@@ -6,5 +6,5 @@ import java.util.ArrayList;
 
 public interface ThumbnailService {
 
-  ArrayList<String> createThumbnails(Path input, Path output, int thumbnailCount);
+  ArrayList<String> createThumbnails(Path input, Path output, int count);
 }
