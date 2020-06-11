@@ -43,7 +43,7 @@ dependencies {
 
     // Other
     implementation 'com.beust:jcommander:1.78'
-    implementation 'org.postgresql:postgresql:42.2.13'
+    implementation 'org.postgresql:postgresql:42.2.14'
 
     // Development
     compileOnly 'org.projectlombok:lombok'
